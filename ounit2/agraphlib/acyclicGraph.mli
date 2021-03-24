@@ -12,6 +12,10 @@
 
 type constraint_type = Lt | Le | Eq
 
+module ConstraintMake (P:Set.OrderedType)
+  : Set.S with type elt = (P.t * constraint_type * P.t)
+
+
 module type Point = sig
   type t
 

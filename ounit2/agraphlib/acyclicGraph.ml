@@ -10,6 +10,27 @@
 
 type constraint_type = Lt | Le | Eq
 
+let constraint_type_ord c1 c2 = match c1, c2 with
+  | Lt, Lt -> 0
+  | Lt, _ -> -1
+  | Le, Lt -> 1
+  | Le, Le -> 0
+  | Le, Eq -> -1
+  | Eq, Eq -> 0
+  | Eq, _ -> 1
+
+module ConstraintMake (P:Set.OrderedType) = Set.Make(struct
+    type t = (P.t * constraint_type * P.t)
+
+    let compare (u,c,v) (u',c',v') =
+      let i = constraint_type_ord c c' in
+      if not (Int.equal i 0) then i
+      else
+        let i' = P.compare u u' in
+        if not (Int.equal i' 0) then i'
+        else P.compare v v'
+  end)
+
 module type Point = sig
   type t
 

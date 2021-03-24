@@ -1,0 +1,22 @@
+(lang dune 2.5)
+(name unit-test-test--ounit2)
+
+(formatting
+ (enabled_for ocaml))
+
+; not sure if want
+; (generate_opam_files true)
+
+(maintainers "The SkySkimmer")
+(authors "The SkySkimmer")
+(version dev)
+
+; Note that we use coq.opam.template to have dune add the correct opam
+; prefix for configure
+(package
+ (name unit-test-test--ounit2)
+ (depends
+  (ocaml (>= 4.05.0))
+  (ocamlfind (>= 1.8.1))
+  (ounit2 :with-test))
+)

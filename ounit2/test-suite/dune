@@ -1,0 +1,2 @@
+(tests (names easytest hardtest)
+ (libraries agraphlib ounit2))
